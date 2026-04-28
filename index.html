@@ -2,43 +2,117 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio - Phạm Tuấn Vinh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Phạm Tuấn Vinh</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px auto; max-width: 800px; line-height: 1.6; color: #333; }
-        h1, h2 { color: #2c3e50; }
-        .section { background: #f9f9f9; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        a { color: #3498db; text-decoration: none; }
+        :root {
+            --primary-color: #2E4A2A; /* Xanh lá đậm giống CV */
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .project-card {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+        .project-card h3 { margin-top: 0; margin-bottom: 5px; }
+        .tech-stack { font-size: 0.9em; color: #666; font-style: italic; margin-bottom: 10px; }
+        a { color: #2980b9; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .tags span {
+            background: #eee; padding: 3px 8px; border-radius: 4px; font-size: 0.85em; margin-right: 5px;
+        }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Phạm Tuấn Vinh</h1>
-        <p>Sinh viên CNTT | Đam mê An toàn thông tin & Bảo mật dữ liệu</p>
+        <p>Sinh viên Công nghệ thông tin | Định hướng An toàn thông tin</p>
     </header>
 
-    <div class="section">
-        <h2>Giới thiệu</h2>
-        <p>Chào bạn, mình là Vinh. Mình đang tập trung nghiên cứu về bảo mật hệ thống và an ninh mạng.</p>
+    <div class="container">
+        <div class="section">
+            <h2>Giới thiệu bản thân</h2>
+            <p>Chào bạn, mình là Vinh. Mình đang theo học ngành Công nghệ thông tin với đam mê đặc biệt dành cho lĩnh vực <strong>Bảo mật dữ liệu</strong> và <strong>An toàn thông tin</strong>. Mình có kinh nghiệm làm việc với các hệ thống Backend (.NET, PHP), cơ sở dữ liệu (SQL Server) và cấu hình hạ tầng mạng. Mục tiêu của mình là xây dựng các phần mềm không chỉ mang lại giá trị hữu ích mà còn phải đảm bảo tính toàn vẹn và an toàn trước các rủi ro bảo mật.</p>
+        </div>
+
+        <div class="section">
+            <h2>Dự án nổi bật</h2>
+
+            <div class="project-card">
+                <h3>1. Database Security in SQL Server</h3>
+                <div class="tech-stack">Công nghệ: SQL Server, T-SQL (Dự án cá nhân)</div>
+                <p>Mô phỏng hệ thống quản lý sinh viên an toàn. Áp dụng mã hóa mức cột (Column-Level Encryption) với thuật toán AES-256 để bảo vệ dữ liệu nhạy cảm. Triển khai phân quyền Role-Based Access Control (RBAC) kết hợp Stored Procedures Proxy để chặn truy cập trực tiếp vào Data Tables.</p>
+                <a href="https://github.com/vinh0612/Database-Security-SQLServer" target="_blank">Xem trên GitHub &rarr;</a>
+            </div>
+
+            <div class="project-card">
+                <h3>2. Hệ thống Học liệu Review</h3>
+                <div class="tech-stack">Công nghệ: .NET 9 API, Angular, SQL Server (Dự án nhóm)</div>
+                <p>Xây dựng hệ thống đánh giá và chia sẻ học liệu dành cho môi trường giáo dục. Hệ thống tập trung vào luồng đánh giá của sinh viên và cơ chế kiểm duyệt chặt chẽ từ phía giảng viên, quản trị viên (chưa tích hợp AI để đảm bảo tính khách quan của dữ liệu gốc).</p>
+                <a href="https://github.com/Wuanzz/HocLieuReview" target="_blank">Xem trên GitHub &rarr;</a>
+            </div>
+
+            <div class="project-card">
+                <h3>3. BookStore & AI Chatbot Support</h3>
+                <div class="tech-stack">Công nghệ: Node.js, JavaScript, HTML/CSS (Dự án nhóm)</div>
+                <p>Phát triển nền tảng website cửa hàng sách trực tuyến. Trực tiếp tham gia nghiên cứu và tích hợp API của mô hình ngôn ngữ lớn (Gemini) để xây dựng tính năng Chatbot AI, hỗ trợ tư vấn khách hàng tự động và giải đáp thắc mắc về sản phẩm.</p>
+                <a href="https://github.com/vuthetam/BookStore" target="_blank">Xem trên GitHub &rarr;</a>
+            </div>
+
+            <div class="project-card">
+                <h3>4. Website Knowledge (Tech Platform)</h3>
+                <div class="tech-stack">Công nghệ: JavaScript, HTML, CSS (Dự án nhóm)</div>
+                <p>Tham gia phát triển giao diện và tính năng cho một nền tảng chia sẻ kiến thức, tập trung chủ yếu vào môi trường việc làm và thông tin của các công ty công nghệ chuyên biệt.</p>
+                <a href="https://github.com/Wuanzz/Website-Knowledge" target="_blank">Xem trên GitHub &rarr;</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Chứng chỉ chuyên môn</h2>
+            <ul>
+                <li><strong>Cyber Threat Management</strong> - Cisco Networking Academy (04/2026)</li>
+                <li><strong>Network Defense</strong> - Cisco Networking Academy (04/2026)</li>
+                <li><strong>Endpoint Security</strong> - Cisco Networking Academy (04/2026)</li>
+                <li><strong>Data Analytics Essentials</strong> - Cisco Networking Academy (04/2026)</li>
+                <li><strong>Introduction to Modern AI</strong> - Cisco Networking Academy (04/2026)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Liên hệ</h2>
+            <p><strong>Email:</strong> <a href="mailto:phamtuanvinh06122005@gmail.com">phamtuanvinh06122005@gmail.com</a></p>
+            <p><strong>Số điện thoại:</strong> 0917042034</p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/vinh0612" target="_blank">github.com/vinh0612</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/vinhpham" target="_blank">linkedin.com/in/vinhpham</a></p>
+        </div>
     </div>
 
-    <div class="section">
-        <h2>Dự án nổi bật</h2>
-        <ul>
-            <li><a href="https://github.com/vinh0612/Database-Security-SQLServer">Database Security (RBAC & AES-256)</a>: Phân quyền và mã hóa CSDL.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Chứng chỉ chuyên môn</h2>
-        <ul>
-            <li>Cyber Threat Management (Cisco)</li>
-            <li>Endpoint Security (Cisco)</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Liên hệ</h2>
-        <p>Email: email_cua_ban@gmail.com | GitHub: <a href="https://github.com/vinh0612">vinh0612</a></p>
-    </div>
 </body>
 </html>
