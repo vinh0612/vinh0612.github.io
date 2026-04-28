@@ -3,116 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Phạm Tuấn Vinh</title>
+    <title>Phạm Tuấn Vinh - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
         :root {
-            --primary-color: #2E4A2A; /* Xanh lá đậm giống CV */
-            --bg-color: #f4f7f6;
-            --text-color: #333;
+            --primary: #2E4A2A; /* Màu xanh lá đậm đồng bộ với CV */
+            --secondary: #4a7c43;
+            --dark: #222;
+            --light: #f4f7f6;
+            --gray: #666;
+            --white: #fff;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { font-size: 1.2rem; opacity: 0.9; }
-        .container { max-width: 900px; margin: auto; padding: 20px; }
-        .section {
-            background: white;
-            padding: 30px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .project-card {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 15px;
-            margin-bottom: 25px;
-        }
-        .project-card h3 { margin-top: 0; margin-bottom: 5px; }
-        .tech-stack { font-size: 0.9em; color: #666; font-style: italic; margin-bottom: 10px; }
-        a { color: #2980b9; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .tags span {
-            background: #eee; padding: 3px 8px; border-radius: 4px; font-size: 0.85em; margin-right: 5px;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        a { text-decoration: none; color: var(--primary); transition: all 0.3s ease; }
+        a:hover { color: var(--secondary); }
+
+        /* HERO SECTION */
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--white); padding: 80px 20px; text-align: center; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--white); object-fit: cover; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        header h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 700; }
+        header p { font-size: 1.2rem; font-weight: 300; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+
+        /* CONTAINER */
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+        .section-title { font-size: 2rem; color: var(--primary); margin-bottom: 30px; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+
+        /* SKILLS (Kỹ năng) */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 50px; }
+        .skill-tag { background: var(--white); color: var(--dark); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #e1e1e1; }
+        .skill-tag i { color: var(--primary); margin-right: 5px; }
+
+        /* PROJECTS GRID */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .project-card { background: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 5px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .project-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--primary); }
+        .project-card p { font-size: 0.95rem; color: var(--gray); margin-bottom: 15px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tech-tags span { background: #e8f5e9; color: var(--primary); font-size: 0.8rem; padding: 4px 10px; border-radius: 4px; font-weight: 600; }
+        .btn-github { display: inline-block; background: var(--dark); color: var(--white); padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; }
+        .btn-github:hover { background: var(--primary); color: var(--white); }
+
+        /* CERTIFICATES & CONTACT DUAL LAYOUT */
+        .bottom-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .cert-list { list-style: none; }
+        .cert-list li { background: var(--white); padding: 12px 20px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.02); font-weight: 600; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+        .cert-list li span { font-weight: 400; color: var(--gray); font-size: 0.85rem; }
+
+        .contact-info { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .contact-info p { margin-bottom: 15px; font-size: 1.05rem; display: flex; align-items: center; }
+        .contact-info p i { width: 30px; color: var(--primary); font-size: 1.2rem; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 20px; background: var(--dark); color: var(--white); margin-top: 50px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
+        <img src="avatar.jpg" alt="Phạm Tuấn Vinh" class="profile-img" onerror="this.src='https://via.placeholder.com/150/2E4A2A/FFFFFF?text=PTV'">
         <h1>Phạm Tuấn Vinh</h1>
-        <p>Sinh viên Công nghệ thông tin | Định hướng An toàn thông tin</p>
+        <p>Sinh viên CNTT | Định hướng An toàn thông tin & Bảo mật dữ liệu | Yêu thích Full-stack Development</p>
     </header>
 
     <div class="container">
-        <div class="section">
-            <h2>Giới thiệu bản thân</h2>
-            <p>Chào bạn, mình là Vinh. Mình đang theo học ngành Công nghệ thông tin với đam mê đặc biệt dành cho lĩnh vực <strong>Bảo mật dữ liệu</strong> và <strong>An toàn thông tin</strong>. Mình có kinh nghiệm làm việc với các hệ thống Backend (.NET, PHP), cơ sở dữ liệu (SQL Server) và cấu hình hạ tầng mạng. Mục tiêu của mình là xây dựng các phần mềm không chỉ mang lại giá trị hữu ích mà còn phải đảm bảo tính toàn vẹn và an toàn trước các rủi ro bảo mật.</p>
+        
+        <h2 class="section-title">Kỹ năng cốt lõi</h2>
+        <div class="skills-container">
+            <span class="skill-tag"><i class="fas fa-shield-alt"></i> SQL Server Security</span>
+            <span class="skill-tag"><i class="fas fa-key"></i> AES-256 & RBAC</span>
+            <span class="skill-tag"><i class="fas fa-network-wired"></i> Cisco Networking</span>
+            <span class="skill-tag"><i class="fab fa-windows"></i> C# (.NET)</span>
+            <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
+            <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
+            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git/GitHub</span>
         </div>
 
-        <div class="section">
-            <h2>Dự án nổi bật</h2>
-
+        <h2 class="section-title">Dự án tiêu biểu</h2>
+        <div class="projects-grid">
+            
             <div class="project-card">
-                <h3>1. Database Security in SQL Server</h3>
-                <div class="tech-stack">Công nghệ: SQL Server, T-SQL (Dự án cá nhân)</div>
-                <p>Mô phỏng hệ thống quản lý sinh viên an toàn. Áp dụng mã hóa mức cột (Column-Level Encryption) với thuật toán AES-256 để bảo vệ dữ liệu nhạy cảm. Triển khai phân quyền Role-Based Access Control (RBAC) kết hợp Stored Procedures Proxy để chặn truy cập trực tiếp vào Data Tables.</p>
-                <a href="https://github.com/vinh0612/Database-Security-SQLServer" target="_blank">Xem trên GitHub &rarr;</a>
+                <h3><i class="fas fa-database"></i> Database Security</h3>
+                <div class="tech-tags">
+                    <span>SQL Server</span><span>T-SQL</span><span>AES-256</span><span>RBAC</span>
+                </div>
+                <p>Mô phỏng hệ thống quản lý sinh viên an toàn. Áp dụng mã hóa mức cột (Column-Level Encryption) với thuật toán AES-256. Triển khai phân quyền RBAC kết hợp Stored Procedures Proxy chặn truy cập trực tiếp vào Data Tables.</p>
+                <a href="https://github.com/vinh0612/Database-Security-SQLServer" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
             </div>
 
             <div class="project-card">
-                <h3>2. Hệ thống Học liệu Review</h3>
-                <div class="tech-stack">Công nghệ: .NET 9 API, Angular, SQL Server (Dự án nhóm)</div>
-                <p>Xây dựng hệ thống đánh giá và chia sẻ học liệu dành cho môi trường giáo dục. Hệ thống tập trung vào luồng đánh giá của sinh viên và cơ chế kiểm duyệt chặt chẽ từ phía giảng viên, quản trị viên (chưa tích hợp AI để đảm bảo tính khách quan của dữ liệu gốc).</p>
-                <a href="https://github.com/Wuanzz/HocLieuReview" target="_blank">Xem trên GitHub &rarr;</a>
+                <h3><i class="fas fa-robot"></i> BookStore AI Chatbot</h3>
+                <div class="tech-tags">
+                    <span>Node.js</span><span>JavaScript</span><span>Gemini API</span>
+                </div>
+                <p>Phát triển nền tảng cửa hàng sách trực tuyến. Trực tiếp tham gia nghiên cứu và tích hợp API của mô hình ngôn ngữ lớn (Gemini AI) để xây dựng tính năng Chatbot hỗ trợ tư vấn và giải đáp khách hàng thông minh.</p>
+                <a href="https://github.com/vuthetam/BookStore" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
             </div>
 
             <div class="project-card">
-                <h3>3. BookStore & AI Chatbot Support</h3>
-                <div class="tech-stack">Công nghệ: Node.js, JavaScript, HTML/CSS (Dự án nhóm)</div>
-                <p>Phát triển nền tảng website cửa hàng sách trực tuyến. Trực tiếp tham gia nghiên cứu và tích hợp API của mô hình ngôn ngữ lớn (Gemini) để xây dựng tính năng Chatbot AI, hỗ trợ tư vấn khách hàng tự động và giải đáp thắc mắc về sản phẩm.</p>
-                <a href="https://github.com/vuthetam/BookStore" target="_blank">Xem trên GitHub &rarr;</a>
+                <h3><i class="fas fa-server"></i> Building C - Network Design</h3>
+                <div class="tech-tags">
+                    <span>Cisco Packet Tracer</span><span>VLAN</span><span>Firewall</span>
+                </div>
+                <p>Thiết kế mô hình mạng phân cấp 3 lớp (3-Tier) cho tòa nhà 10 tầng. Quy hoạch IP, cấu hình VLAN cho hơn 2000 thiết bị kết nối. Thiết lập các chính sách định tuyến và tường lửa cơ bản để quản lý lưu lượng an toàn.</p>
+                <a href="#" class="btn-github" style="background:#888;"><i class="fas fa-lock"></i> Đồ án nội bộ</a>
             </div>
 
             <div class="project-card">
-                <h3>4. Website Knowledge (Tech Platform)</h3>
-                <div class="tech-stack">Công nghệ: JavaScript, HTML, CSS (Dự án nhóm)</div>
-                <p>Tham gia phát triển giao diện và tính năng cho một nền tảng chia sẻ kiến thức, tập trung chủ yếu vào môi trường việc làm và thông tin của các công ty công nghệ chuyên biệt.</p>
-                <a href="https://github.com/Wuanzz/Website-Knowledge" target="_blank">Xem trên GitHub &rarr;</a>
+                <h3><i class="fas fa-chalkboard-teacher"></i> Học liệu Review</h3>
+                <div class="tech-tags">
+                    <span>.NET 9 API</span><span>Angular</span><span>SQL Server</span>
+                </div>
+                <p>Hệ thống đánh giá và chia sẻ học liệu giáo dục. Xây dựng Backend vững chắc, tập trung xử lý luồng phân quyền đánh giá của sinh viên và cơ chế kiểm duyệt nội dung khắt khe từ phía giảng viên/quản trị viên.</p>
+                <a href="https://github.com/Wuanzz/HocLieuReview" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
+            </div>
+
+        </div>
+
+        <div class="bottom-section">
+            <div>
+                <h2 class="section-title">Chứng chỉ \& Badges (Cisco)</h2>
+                <ul class="cert-list">
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Cyber Threat Management <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Network Defense <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Endpoint Security <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Introduction to Cybersecurity <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Introduction to Modern AI <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Apply AI: Analyze Reviews <span>04/2026</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Data Analytics Essentials <span>04/2026</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="section-title">Kết nối với tôi</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:phamtuanvinh06122005@gmail.com">phamtuanvinh06122005@gmail.com</a></p>
+                    <p><i class="fas fa-phone-alt"></i> 0917 042 034</p>
+                    <p><i class="fab fa-github"></i> <a href="https://github.com/vinh0612" target="_blank">github.com/vinh0612</a></p>
+                    <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/vinhpham" target="_blank">linkedin.com/in/vinhpham</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Long An, Việt Nam</p>
+                </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>Chứng chỉ chuyên môn</h2>
-            <ul>
-                <li><strong>Cyber Threat Management</strong> - Cisco Networking Academy (04/2026)</li>
-                <li><strong>Network Defense</strong> - Cisco Networking Academy (04/2026)</li>
-                <li><strong>Endpoint Security</strong> - Cisco Networking Academy (04/2026)</li>
-                <li><strong>Data Analytics Essentials</strong> - Cisco Networking Academy (04/2026)</li>
-                <li><strong>Introduction to Modern AI</strong> - Cisco Networking Academy (04/2026)</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Liên hệ</h2>
-            <p><strong>Email:</strong> <a href="mailto:phamtuanvinh06122005@gmail.com">phamtuanvinh06122005@gmail.com</a></p>
-            <p><strong>Số điện thoại:</strong> 0917042034</p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/vinh0612" target="_blank">github.com/vinh0612</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/vinhpham" target="_blank">linkedin.com/in/vinhpham</a></p>
-        </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Phạm Tuấn Vinh. Được xây dựng cho Đồ án Thực hành nghề nghiệp.</p>
+    </footer>
 
 </body>
 </html>
