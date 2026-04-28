@@ -3,159 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phạm Tuấn Vinh - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+    <title>Phạm Tuấn Vinh | IT Dashboard Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2E4A2A; /* Màu xanh lá đậm đồng bộ với CV */
-            --secondary: #4a7c43;
-            --dark: #222;
-            --light: #f4f7f6;
-            --gray: #666;
-            --white: #fff;
+            --primary: #2E4A2A; /* Xanh lá đậm chuẩn CV */
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-sub: #4b5563;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--light); color: var(--dark); line-height: 1.6; }
-        a { text-decoration: none; color: var(--primary); transition: all 0.3s ease; }
-        a:hover { color: var(--secondary); }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text-main);
+            height: 100vh; /* Ép độ cao bằng màn hình */
+            overflow: hidden; /* Chống cuộn trang chính trên Desktop */
+        }
 
-        /* HERO SECTION */
-        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--white); padding: 80px 20px; text-align: center; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--white); object-fit: cover; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        header h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 700; }
-        header p { font-size: 1.2rem; font-weight: 300; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+        /* Layout Chính */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px; /* 3 Cột: Profile - Projects - Skills */
+            gap: 15px;
+            height: 100vh;
+            padding: 15px;
+        }
 
-        /* CONTAINER */
-        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
-        .section-title { font-size: 2rem; color: var(--primary); margin-bottom: 30px; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        /* Định dạng chung cho các Widget (Card) */
+        .widget {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .scrollable { overflow-y: auto; padding-right: 5px; }
+        .scrollable::-webkit-scrollbar { width: 5px; }
+        .scrollable::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
 
-        /* SKILLS (Kỹ năng) */
-        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 50px; }
-        .skill-tag { background: var(--white); color: var(--dark); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #e1e1e1; }
-        .skill-tag i { color: var(--primary); margin-right: 5px; }
+        h2 { color: var(--primary); font-size: 1.1rem; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 
-        /* PROJECTS GRID */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .project-card { background: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 5px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .project-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--primary); }
-        .project-card p { font-size: 0.95rem; color: var(--gray); margin-bottom: 15px; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .tech-tags span { background: #e8f5e9; color: var(--primary); font-size: 0.8rem; padding: 4px 10px; border-radius: 4px; font-weight: 600; }
-        .btn-github { display: inline-block; background: var(--dark); color: var(--white); padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; }
-        .btn-github:hover { background: var(--primary); color: var(--white); }
+        /* CỘT 1: PROFILE & CONTACT */
+        .profile-col { text-align: center; }
+        .avatar { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 15px; object-fit: cover; }
+        .profile-col h1 { font-size: 1.3rem; color: var(--primary); margin-bottom: 5px; }
+        .profile-col p.tagline { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 20px; }
+        .contact-box { text-align: left; font-size: 0.85rem; }
+        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-sub); text-decoration: none; }
+        .contact-item i { color: var(--primary); width: 15px; }
+        .contact-item:hover { color: var(--primary); }
 
-        /* CERTIFICATES & CONTACT DUAL LAYOUT */
-        .bottom-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .cert-list { list-style: none; }
-        .cert-list li { background: var(--white); padding: 12px 20px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.02); font-weight: 600; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
-        .cert-list li span { font-weight: 400; color: var(--gray); font-size: 0.85rem; }
+        /* CỘT 2: PROJECTS (Trung tâm) */
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .project-card { border: 1px solid #eee; border-radius: 8px; padding: 15px; transition: 0.3s; background: #fafafa; }
+        .project-card:hover { border-color: var(--primary); background: #fff; transform: translateY(-3px); }
+        .project-card h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--primary); }
+        .project-card p { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px; line-height: 1.4; }
+        .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+        .tags span { background: #e8f5e9; color: var(--primary); font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
 
-        .contact-info { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .contact-info p { margin-bottom: 15px; font-size: 1.05rem; display: flex; align-items: center; }
-        .contact-info p i { width: 30px; color: var(--primary); font-size: 1.2rem; }
+        /* CỘT 3: SKILLS & CERTS */
+        .skill-group { margin-bottom: 20px; }
+        .skill-group h3 { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
+        .pill-container { display: flex; flex-wrap: wrap; gap: 6px; }
+        .pill { background: var(--primary); color: white; font-size: 0.75rem; padding: 4px 10px; border-radius: 15px; }
+        
+        .cert-item { background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.8rem; border-left: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
+        .cert-item span { color: #888; font-size: 0.7rem; }
 
-        /* FOOTER */
-        footer { text-align: center; padding: 20px; background: var(--dark); color: var(--white); margin-top: 50px; font-size: 0.9rem; }
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            body { overflow: auto; height: auto; }
+            .dashboard { grid-template-columns: 1fr; height: auto; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="avatar.jpg" alt="Phạm Tuấn Vinh" class="profile-img" onerror="this.src='https://via.placeholder.com/150/2E4A2A/FFFFFF?text=PTV'">
-        <h1>Phạm Tuấn Vinh</h1>
-        <p>Sinh viên CNTT | Định hướng An toàn thông tin & Bảo mật dữ liệu | Yêu thích Full-stack Development</p>
-    </header>
-
-    <div class="container">
+    <div class="dashboard">
         
-        <h2 class="section-title">Kỹ năng cốt lõi</h2>
-        <div class="skills-container">
-            <span class="skill-tag"><i class="fas fa-shield-alt"></i> SQL Server Security</span>
-            <span class="skill-tag"><i class="fas fa-key"></i> AES-256 & RBAC</span>
-            <span class="skill-tag"><i class="fas fa-network-wired"></i> Cisco Networking</span>
-            <span class="skill-tag"><i class="fab fa-windows"></i> C# (.NET)</span>
-            <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
-            <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
-            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
-            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git/GitHub</span>
-        </div>
-
-        <h2 class="section-title">Dự án tiêu biểu</h2>
-        <div class="projects-grid">
+        <div class="widget profile-col">
+            <img src="avatar.jpg" alt="Phạm Tuấn Vinh" class="avatar" onerror="this.src='https://via.placeholder.com/110'">
+            <h1>Phạm Tuấn Vinh</h1>
+            <p class="tagline">Sinh viên CNTT (HK6)<br>Định hướng An toàn thông tin</p>
             
-            <div class="project-card">
-                <h3><i class="fas fa-database"></i> Database Security</h3>
-                <div class="tech-tags">
-                    <span>SQL Server</span><span>T-SQL</span><span>AES-256</span><span>RBAC</span>
-                </div>
-                <p>Mô phỏng hệ thống quản lý sinh viên an toàn. Áp dụng mã hóa mức cột (Column-Level Encryption) với thuật toán AES-256. Triển khai phân quyền RBAC kết hợp Stored Procedures Proxy chặn truy cập trực tiếp vào Data Tables.</p>
-                <a href="https://github.com/vinh0612/Database-Security-SQLServer" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
+            <div class="contact-box">
+                <h2><i class="fas fa-id-card"></i> Liên hệ</h2>
+                <a href="tel:0917042034" class="contact-item"><i class="fas fa-phone"></i> 0917 042 034</a>
+                <a href="mailto:phamtuanvinh06122005@gmail.com" class="contact-item"><i class="fas fa-envelope"></i> phamtuanvinh06122005@gmail.com</a>
+                <a href="https://github.com/vinh0612" target="_blank" class="contact-item"><i class="fab fa-github"></i> github.com/vinh0612</a>
+                <a href="https://linkedin.com/in/vinhpham" target="_blank" class="contact-item"><i class="fab fa-linkedin"></i> linkedin.com/in/vinhpham</a>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Long An, Việt Nam</div>
             </div>
 
-            <div class="project-card">
-                <h3><i class="fas fa-robot"></i> BookStore AI Chatbot</h3>
-                <div class="tech-tags">
-                    <span>Node.js</span><span>JavaScript</span><span>Gemini API</span>
-                </div>
-                <p>Phát triển nền tảng cửa hàng sách trực tuyến. Trực tiếp tham gia nghiên cứu và tích hợp API của mô hình ngôn ngữ lớn (Gemini AI) để xây dựng tính năng Chatbot hỗ trợ tư vấn và giải đáp khách hàng thông minh.</p>
-                <a href="https://github.com/vuthetam/BookStore" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
+            <div style="margin-top: 20px; text-align: left;">
+                <h2><i class="fas fa-user-tag"></i> Mục tiêu</h2>
+                <p style="font-size: 0.8rem; color: var(--text-sub); line-height: 1.5;">Phát triển chuyên sâu mảng Security & Full-stack. Mong muốn thực tập tại các công ty công nghệ quốc tế.</p>
             </div>
-
-            <div class="project-card">
-                <h3><i class="fas fa-server"></i> Building C - Network Design</h3>
-                <div class="tech-tags">
-                    <span>Cisco Packet Tracer</span><span>VLAN</span><span>Firewall</span>
-                </div>
-                <p>Thiết kế mô hình mạng phân cấp 3 lớp (3-Tier) cho tòa nhà 10 tầng. Quy hoạch IP, cấu hình VLAN cho hơn 2000 thiết bị kết nối. Thiết lập các chính sách định tuyến và tường lửa cơ bản để quản lý lưu lượng an toàn.</p>
-                <a href="#" class="btn-github" style="background:#888;"><i class="fas fa-lock"></i> Đồ án nội bộ</a>
-            </div>
-
-            <div class="project-card">
-                <h3><i class="fas fa-chalkboard-teacher"></i> Học liệu Review</h3>
-                <div class="tech-tags">
-                    <span>.NET 9 API</span><span>Angular</span><span>SQL Server</span>
-                </div>
-                <p>Hệ thống đánh giá và chia sẻ học liệu giáo dục. Xây dựng Backend vững chắc, tập trung xử lý luồng phân quyền đánh giá của sinh viên và cơ chế kiểm duyệt nội dung khắt khe từ phía giảng viên/quản trị viên.</p>
-                <a href="https://github.com/Wuanzz/HocLieuReview" target="_blank" class="btn-github"><i class="fab fa-github"></i> Xem Source Code</a>
-            </div>
-
         </div>
 
-        <div class="bottom-section">
-            <div>
-                <h2 class="section-title">Chứng chỉ \& Badges (Cisco)</h2>
-                <ul class="cert-list">
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Cyber Threat Management <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Network Defense <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Endpoint Security <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Introduction to Cybersecurity <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Introduction to Modern AI <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Apply AI: Analyze Reviews <span>04/2026</span></li>
-                    <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right:10px;"></i> Data Analytics Essentials <span>04/2026</span></li>
-                </ul>
-            </div>
-
-            <div>
-                <h2 class="section-title">Kết nối với tôi</h2>
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:phamtuanvinh06122005@gmail.com">phamtuanvinh06122005@gmail.com</a></p>
-                    <p><i class="fas fa-phone-alt"></i> 0917 042 034</p>
-                    <p><i class="fab fa-github"></i> <a href="https://github.com/vinh0612" target="_blank">github.com/vinh0612</a></p>
-                    <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/vinhpham" target="_blank">linkedin.com/in/vinhpham</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Long An, Việt Nam</p>
+        <div class="widget">
+            <h2><i class="fas fa-code-branch"></i> Dự án tiêu biểu</h2>
+            <div class="project-grid scrollable">
+                
+                <div class="project-card">
+                    <h3>Database Security</h3>
+                    <p>Mã hóa AES-256 & Phân quyền RBAC cho SQL Server. Bảo vệ dữ liệu nhạy cảm tầng Database.</p>
+                    <div class="tags"><span>SQL</span><span>Security</span><span>AES</span></div>
                 </div>
+
+                <div class="project-card">
+                    <h3>BookStore AI</h3>
+                    <p>Website Node.js tích hợp Gemini AI Chatbot hỗ trợ tư vấn khách hàng tự động.</p>
+                    <div class="tags"><span>Node.js</span><span>AI</span><span>Gemini</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Học liệu Review</h3>
+                    <p>Nền tảng đánh giá học liệu cho SV. Backend .NET 9, Frontend Angular.</p>
+                    <div class="tags"><span>.NET 9</span><span>Angular</span><span>Teamwork</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Building C Network</h3>
+                    <p>Thiết kế mô hình mạng 3-Tier cho 2000+ thiết bị. Cấu hình VLAN & Firewall.</p>
+                    <div class="tags"><span>Cisco</span><span>Networking</span><span>Design</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Website Knowledge</h3>
+                    <p>Nền tảng chia sẻ kiến thức công nghệ và thông tin việc làm IT chuyên biệt.</p>
+                    <div class="tags"><span>JavaScript</span><span>HTML/CSS</span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="widget">
+            <div class="scrollable">
+                <h2><i class="fas fa-tools"></i> Kỹ năng</h2>
+                <div class="skill-group">
+                    <h3>Chuyên môn</h3>
+                    <div class="pill-container">
+                        <span class="pill">SQL Security</span><span class="pill">RBAC</span>
+                        <span class="pill">AES-256</span><span class="pill">Cisco Admin</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3>Lập trình</h3>
+                    <div class="pill-container">
+                        <span class="pill">.NET</span><span class="pill">PHP</span>
+                        <span class="pill">Node.js</span><span class="pill">Python</span>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 10px;"><i class="fas fa-certificate"></i> Chứng chỉ Cisco</h2>
+                <div class="cert-item">Cyber Threat Mgmt <span>2026</span></div>
+                <div class="cert-item">Network Defense <span>2026</span></div>
+                <div class="cert-item">Endpoint Security <span>2026</span></div>
+                <div class="cert-item">Intro to Cybersecurity <span>2026</span></div>
+                <div class="cert-item">Modern AI <span>2026</span></div>
+                <div class="cert-item">Data Analytics <span>2026</span></div>
+                <div class="cert-item">Apply AI: Reviews <span>2026</span></div>
             </div>
         </div>
 
     </div>
-
-    <footer>
-        <p>&copy; 2026 Phạm Tuấn Vinh. Được xây dựng cho Đồ án Thực hành nghề nghiệp.</p>
-    </footer>
 
 </body>
 </html>
