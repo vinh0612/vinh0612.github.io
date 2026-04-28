@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2E4A2A; /* Xanh lá đậm chuẩn CV */
+            --primary: #2E4A2A; /* Xanh lá đậm chuẩn CV LaTeX */
             --bg: #f0f2f5;
             --card-bg: #ffffff;
             --text-main: #1a1a1a;
@@ -20,14 +20,14 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg); 
             color: var(--text-main);
-            height: 100vh; /* Ép độ cao bằng màn hình */
+            height: 100vh; /* Ép độ cao full màn hình */
             overflow: hidden; /* Chống cuộn trang chính trên Desktop */
         }
 
-        /* Layout Chính */
+        /* Layout Dashboard chính */
         .dashboard {
             display: grid;
-            grid-template-columns: 280px 1fr 320px; /* 3 Cột: Profile - Projects - Skills */
+            grid-template-columns: 280px 1fr 320px; /* 3 Cột */
             gap: 15px;
             height: 100vh;
             padding: 15px;
@@ -41,46 +41,77 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow: hidden; /* Giữ nội dung trong widget */
         }
-        .scrollable { overflow-y: auto; padding-right: 5px; }
+
+        /* Thanh cuộn nội bộ cho widget */
+        .scrollable { overflow-y: auto; padding-right: 5px; flex-grow: 1; }
         .scrollable::-webkit-scrollbar { width: 5px; }
         .scrollable::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
 
+        /* Tiêu đề mục */
         h2 { color: var(--primary); font-size: 1.1rem; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 
-        /* CỘT 1: PROFILE & CONTACT */
-        .profile-col { text-align: center; }
-        .avatar { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 15px; object-fit: cover; }
-        .profile-col h1 { font-size: 1.3rem; color: var(--primary); margin-bottom: 5px; }
-        .profile-col p.tagline { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 20px; }
-        .contact-box { text-align: left; font-size: 0.85rem; }
-        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-sub); text-decoration: none; }
-        .contact-item i { color: var(--primary); width: 15px; }
+        % ==========================================
+        % CỘT 1: PROFILE (ĐÃ FIX CĂN CHỈNH)
+        % ==========================================
+        .profile-col { 
+            display: flex; /* Dùng Flexbox để căn chỉnh hoàn hảo */
+            flex-direction: column;
+            align-items: center; /* Ép toàn bộ children vào chính giữa tâm */
+            justify-content: flex-start; /* Bắt đầu từ đỉnh widget */
+            text-align: center;
+            padding-top: 30px; /* Tạo khoảng trống đỉnh đầu */
+        }
+
+        .avatar {
+            width: 120px; /* Tăng nhẹ kích thước */
+            height: 120px;
+            border-radius: 50%; /* Bo tròn hoàn hảo */
+            border: 4px solid var(--primary); /* Viền vững chãi hơn */
+            margin-bottom: 20px;
+            object-fit: cover; /* Giữ tỷ lệ ảnh */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho khung */
+            
+            /* Ép block và auto margin để căn giữa tuyệt đối */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-col h1 { font-size: 1.35rem; color: var(--primary); margin-bottom: 5px; }
+        .profile-col p.tagline { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 25px; line-height: 1.4; }
+
+        /* Mục Liên hệ vẫn giữ căn trái để dễ đọc */
+        .contact-box { width: 100%; text-align: left; font-size: 0.85rem; margin-top: auto; } /* margin-top: auto để đẩy mục liên hệ xuống dưới cùng nếu thừa không gian */
+        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-sub); text-decoration: none; transition: color 0.3s; }
+        .contact-item i { color: var(--primary); width: 15px; text-align: center; }
         .contact-item:hover { color: var(--primary); }
 
-        /* CỘT 2: PROJECTS (Trung tâm) */
+        /* CỘT GIỮA: DỰ ÁN (Giữ nguyên) */
         .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .project-card { border: 1px solid #eee; border-radius: 8px; padding: 15px; transition: 0.3s; background: #fafafa; }
-        .project-card:hover { border-color: var(--primary); background: #fff; transform: translateY(-3px); }
+        .project-card { border: 1px solid #eee; border-radius: 8px; padding: 15px; transition: 0.3s; background: #fafafa; display: flex; flex-direction: column; }
+        .project-card:hover { border-color: var(--primary); background: #fff; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .project-card h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--primary); }
-        .project-card p { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px; line-height: 1.4; }
+        .project-card p { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px; line-height: 1.4; flex-grow: 1; }
         .tags { display: flex; flex-wrap: wrap; gap: 5px; }
         .tags span { background: #e8f5e9; color: var(--primary); font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
 
-        /* CỘT 3: SKILLS & CERTS */
+        /* CỘT PHẢI: KỸ NĂNG & CHỨNG CHỈ (Giữ nguyên) */
         .skill-group { margin-bottom: 20px; }
-        .skill-group h3 { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
+        .skill-group h3 { font-size: 0.8rem; margin-bottom: 8px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
         .pill-container { display: flex; flex-wrap: wrap; gap: 6px; }
         .pill { background: var(--primary); color: white; font-size: 0.75rem; padding: 4px 10px; border-radius: 15px; }
         
-        .cert-item { background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.8rem; border-left: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
+        .cert-item { background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.8rem; border-left: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
         .cert-item span { color: #888; font-size: 0.7rem; }
 
         /* Mobile Responsive */
         @media (max-width: 1024px) {
             body { overflow: auto; height: auto; }
-            .dashboard { grid-template-columns: 1fr; height: auto; }
+            .dashboard { grid-template-columns: 1fr; height: auto; padding: 10px; gap: 10px; }
+            .widget { height: auto !important; }
+            .scrollable { overflow: visible; height: auto; }
         }
     </style>
 </head>
@@ -89,9 +120,11 @@
     <div class="dashboard">
         
         <div class="widget profile-col">
-            <img src="avatar.jpg" alt="Phạm Tuấn Vinh" class="avatar" onerror="this.src='https://via.placeholder.com/110'">
-            <h1>Phạm Tuấn Vinh</h1>
-            <p class="tagline">Sinh viên CNTT (HK6)<br>Định hướng An toàn thông tin</p>
+            <img src="avatar.jpg" alt="Phạm Tuấn Vinh" class="avatar" onerror="this.src='https://via.placeholder.com/120/2E4A2A/FFFFFF?text=PTV'">
+            
+            <div style="flex-grow: 1;"> <h1>Phạm Tuấn Vinh</h1>
+                <p class="tagline">Sinh viên CNTT (HK6)<br>Định hướng An toàn thông tin</p>
+            </div>
             
             <div class="contact-box">
                 <h2><i class="fas fa-id-card"></i> Liên hệ</h2>
@@ -101,47 +134,44 @@
                 <a href="https://linkedin.com/in/vinhpham" target="_blank" class="contact-item"><i class="fab fa-linkedin"></i> linkedin.com/in/vinhpham</a>
                 <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Long An, Việt Nam</div>
             </div>
-
-            <div style="margin-top: 20px; text-align: left;">
-                <h2><i class="fas fa-user-tag"></i> Mục tiêu</h2>
-                <p style="font-size: 0.8rem; color: var(--text-sub); line-height: 1.5;">Phát triển chuyên sâu mảng Security & Full-stack. Mong muốn thực tập tại các công ty công nghệ quốc tế.</p>
-            </div>
         </div>
 
         <div class="widget">
             <h2><i class="fas fa-code-branch"></i> Dự án tiêu biểu</h2>
-            <div class="project-grid scrollable">
-                
-                <div class="project-card">
-                    <h3>Database Security</h3>
-                    <p>Mã hóa AES-256 & Phân quyền RBAC cho SQL Server. Bảo vệ dữ liệu nhạy cảm tầng Database.</p>
-                    <div class="tags"><span>SQL</span><span>Security</span><span>AES</span></div>
-                </div>
+            <div class="scrollable">
+                <div class="project-grid">
+                    
+                    <div class="project-card">
+                        <h3>Database Security</h3>
+                        <p>Mã hóa AES-256 & Phân quyền RBAC cho SQL Server. Bảo vệ dữ liệu nhạy cảm tầng Database.</p>
+                        <div class="tags"><span>SQL</span><span>Security</span><span>AES</span></div>
+                    </div>
 
-                <div class="project-card">
-                    <h3>BookStore AI</h3>
-                    <p>Website Node.js tích hợp Gemini AI Chatbot hỗ trợ tư vấn khách hàng tự động.</p>
-                    <div class="tags"><span>Node.js</span><span>AI</span><span>Gemini</span></div>
-                </div>
+                    <div class="project-card">
+                        <h3>BookStore AI Chatbot</h3>
+                        <p>Website Node.js tích hợp Gemini AI Chatbot hỗ trợ tư vấn và giải đáp khách hàng thông minh.</p>
+                        <div class="tags"><span>Node.js</span><span>AI</span><span>Gemini</span></div>
+                    </div>
 
-                <div class="project-card">
-                    <h3>Học liệu Review</h3>
-                    <p>Nền tảng đánh giá học liệu cho SV. Backend .NET 9, Frontend Angular.</p>
-                    <div class="tags"><span>.NET 9</span><span>Angular</span><span>Teamwork</span></div>
-                </div>
+                    <div class="project-card">
+                        <h3>Học liệu Review</h3>
+                        <p>Nền tảng đánh giá học liệu giáo dục. Backend .NET 9, Frontend Angular.</p>
+                        <div class="tags"><span>.NET 9</span><span>Angular</span><span>Teamwork</span></div>
+                    </div>
 
-                <div class="project-card">
-                    <h3>Building C Network</h3>
-                    <p>Thiết kế mô hình mạng 3-Tier cho 2000+ thiết bị. Cấu hình VLAN & Firewall.</p>
-                    <div class="tags"><span>Cisco</span><span>Networking</span><span>Design</span></div>
-                </div>
+                    <div class="project-card">
+                        <h3>Building C Network</h3>
+                        <p>Thiết kế mô hình mạng 3-Tier cho 2000+ thiết bị. Cấu hình VLAN & Firewall.</p>
+                        <div class="tags"><span>Cisco</span><span>Networking</span><span>Design</span></div>
+                    </div>
 
-                <div class="project-card">
-                    <h3>Website Knowledge</h3>
-                    <p>Nền tảng chia sẻ kiến thức công nghệ và thông tin việc làm IT chuyên biệt.</p>
-                    <div class="tags"><span>JavaScript</span><span>HTML/CSS</span></div>
-                </div>
+                    <div class="project-card">
+                        <h3>Website Knowledge</h3>
+                        <p>Nền tảng chia sẻ kiến thức công nghệ và thông tin việc làm IT chuyên biệt.</p>
+                        <div class="tags"><span>JavaScript</span><span>HTML/CSS</span></div>
+                    </div>
 
+                </div>
             </div>
         </div>
 
@@ -163,14 +193,14 @@
                     </div>
                 </div>
 
-                <h2 style="margin-top: 10px;"><i class="fas fa-certificate"></i> Chứng chỉ Cisco</h2>
-                <div class="cert-item">Cyber Threat Mgmt <span>2026</span></div>
-                <div class="cert-item">Network Defense <span>2026</span></div>
-                <div class="cert-item">Endpoint Security <span>2026</span></div>
-                <div class="cert-item">Intro to Cybersecurity <span>2026</span></div>
-                <div class="cert-item">Modern AI <span>2026</span></div>
-                <div class="cert-item">Data Analytics <span>2026</span></div>
-                <div class="cert-item">Apply AI: Reviews <span>2026</span></div>
+                <h2 style="margin-top: 10px;"><i class="fas fa-certificate"></i> Chứng chỉ Cisco (Badges)</h2>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Cyber Threat Mgmt <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Network Defense <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Endpoint Security <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Intro to Cybersecurity <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Modern AI <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Data Analytics <span>2026</span></div>
+                <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--primary); margin-right:5px;"></i> Apply AI: Reviews <span>2026</span></div>
             </div>
         </div>
 
